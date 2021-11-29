@@ -173,21 +173,21 @@ This means it can only execute **one thing** at a time!
 Let's take a look at this piece of code, assuming this entire piece is wrapped by a *main* function: 
 
 ```ts {all|all|14|9-12|10|5-7|6|11|1-3|2|11|14|15|all}
-function eat(cookedFood: string) {
-  console.log("Chomp chomp", cookedFood);
+function transform(data) {
+  return `Transformed data: ${data}`
 }
 
-function makeFood(food: string) {
-  return `Cooked ${food}`
+function getFromService(data) {
+  return `Data from service ${data}`
 }
 
-function haveDinner(food: string) {
-  const cookedFood = makeFood(food);  
-  eat(cookedFood);
+function fetchData(data) {
+  const dataFromService = getFromService(data);  
+  return transform(dataFromService);
 }
 
-haveDinner("Fried Eggs");
-console.log("Rest and watch TV");
+const data = fetchData("Books");
+console.log("Render data:", data);
 ```
 
 </div>
@@ -197,4 +197,33 @@ console.log("Rest and watch TV");
 
 </div>
 </div>
+
+
+---
+
+# The problem with the Call Stack
+
+<br/>
+
+🤔 What if it takes a really long time to getFromService()? 🤔
+```ts
+function getFromService(data) {
+  const start = new Date().getTime();
+  while (new Date().getTime() < start + 10000);
+  return `Data from service: ${data}`;
+}
+
+function fetchData(data) {
+  const dataFromService = getFromService();
+  return `Test ${dataFromService}`
+}
+
+const data = fetchData("Books");
+console.log(data);
+```
+
+<br/>
+
+---
+
 
