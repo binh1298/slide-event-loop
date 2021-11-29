@@ -61,11 +61,9 @@ h1 {
 # Agenda
 
 - 1. **Single threaded languages vs Multi threaded languages**
-- 2. **What's a stack**
-- 3. **What's a queue**
-- 4. **How Javascript execute your code**
-- 5. **Let's zoom out**
-- 6. **The event loop**
+- 2. **Stack and Queue**
+- 3. **How Javascript execute your code using only stack**
+- 4. **Let's zoom out**
 
 ---
 
@@ -138,7 +136,7 @@ This means it can only execute **one thing** at a time!
 <div grid="~ cols-2 gap-4">
 <div>
 
-**Stack** is a linear data structure that items can only be added or removed in 2 ways:
+**Stack** is an "array" of items can only be added or removed in 2 ways:
 
 - push: Add to the top
 - pop: Remove from the top
@@ -151,13 +149,42 @@ This means it can only execute **one thing** at a time!
 
 🤔 What does this have to do with JS code execution?
 
--> Answer: I'm glad you asked
+-> Answer: I'm glad you asked, but let's wait a bit to talk about the Queue first
 </div>
 <div>
 
 <img border="rounded" src="/images/stack_of_dishes.jpg">
 </div>
 </div>
+
+---
+
+# Queue
+
+<div grid="~ cols-2 gap-4">
+<div>
+
+**Queue** is an "array" of items can only be added or removed in 2 ways:
+
+- push: Add to the bottom
+- pop: Remove from the top
+
+<br/>
+
+> Imagine going to the supermarket during covid
+
+<br/>
+
+🤔 What does this have to do with JS code execution?
+
+-> Answer: First, let's take a look at how your code is executed using **only the Stack**
+</div>
+<div>
+
+<img border="rounded" src="https://v-count.com/wp-content/uploads/2021/07/shutterstock_1891209922-3.png">
+</div>
+</div>
+
 
 ---
 
@@ -203,10 +230,9 @@ console.log("Render data:", data);
 
 # The problem with the Call Stack
 
-<br/>
+##### 🤔 What if it takes a really long time to getFromService()? 🤔
 
-🤔 What if it takes a really long time to getFromService()? 🤔
-```ts
+```ts {all}
 function getFromService(data) {
   const start = new Date().getTime();
   while (new Date().getTime() < start + 10000);
@@ -221,9 +247,40 @@ function fetchData(data) {
 const data = fetchData("Books");
 console.log(data);
 ```
-
-<br/>
-
+-> Answer: we actually need 3 things:
+- The browser's help (or Node/Deno): provides fetch/setTimeout
+- The queue & event loop
+- The callback pattern
+  
 ---
 
+<div grid="~ cols-2 gap-4">
+<div>
 
+Let's take a look at this piece of code, assuming this entire piece is wrapped by a *main* function: 
+
+```ts {all}
+function fetchData(data, callback) {
+  setTimeout(
+    () => {callback(`Fetched ${data}`)}, 
+    3000
+  )
+}
+
+fetchData("Books", (data) => console.log(data));
+fetchData("Students", (data) => console.log(data));
+
+```
+
+</div>
+<div>
+
+<BrowserWrapper>
+<BrowserAPI/>
+<CallStackSetTimeout />
+</BrowserWrapper>
+
+</div>
+</div>
+
+---
