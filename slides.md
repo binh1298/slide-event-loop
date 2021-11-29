@@ -170,9 +170,9 @@ This means it can only execute **one thing** at a time!
 <div grid="~ cols-2 gap-4">
 <div>
 
-Let's take a look at this piece of code: 
+Let's take a look at this piece of code, assuming this entire piece is wrapped by a *main* function: 
 
-```ts {all|14|9-12|10|5-7|10|11|1-3|14|15}
+```ts {all|all|14|9-12|10|5-7|6|11|1-3|2|11|14|15}
 function eat(cookedFood: string) {
   console.log("Chomp chomp", cookedFood);
 }
