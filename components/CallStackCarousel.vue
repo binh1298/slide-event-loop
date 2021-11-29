@@ -2,7 +2,11 @@
 import { useRoute } from "vue-router";
 
 const callStackItems = [
-  { functionCalls: [], description: "calls main()" },
+  {
+    functionCalls: [],
+    description: "calls main()",
+    stackDescription: "the stack is empty",
+  },
   {
     functionCalls: ["main()"],
     description: "starts executing main()",
@@ -62,6 +66,11 @@ const callStackItems = [
     description: "finishes executing main",
     stackDescription: "pops main out of the stack",
     isPopped: true,
+  },
+  {
+    functionCalls: [],
+    description: "the code finishes",
+    stackDescription: "the stack is empty",
   },
 ];
 

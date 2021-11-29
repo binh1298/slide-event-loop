@@ -172,7 +172,7 @@ This means it can only execute **one thing** at a time!
 
 Let's take a look at this piece of code, assuming this entire piece is wrapped by a *main* function: 
 
-```ts {all|all|14|9-12|10|5-7|6|11|1-3|2|11|14|15}
+```ts {all|all|14|9-12|10|5-7|6|11|1-3|2|11|14|15|all}
 function eat(cookedFood: string) {
   console.log("Chomp chomp", cookedFood);
 }
