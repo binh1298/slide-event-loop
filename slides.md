@@ -9,7 +9,7 @@ class: "text-center"
 # https://sli.dev/custom/highlighters.html
 highlighter: shiki
 # show line numbers in code blocks
-lineNumbers: false
+lineNumbers: true
 # some information about the slides, markdown enabled
 info: |
   ## Slidev Starter Template
@@ -125,8 +125,76 @@ This means it can only execute **one thing** at a time!
 <br/>
 <br/>
 
-#### In order to understand what event loop is, we have to understand 2 concepts: **Stack** & **Queue**
+#### In order to understand what **event loop** is, we have to understand 2 concepts: **Stack** & **Queue**
 
 ---
 
 # Stack
+
+---
+
+# Stack
+
+<div grid="~ cols-2 gap-4">
+<div>
+
+**Stack** is a linear data structure that items can only be added or removed in 2 ways:
+
+- push: Add to the top
+- pop: Remove from the top
+
+<br/>
+
+> Imagine a stack of dishes (or just look at the image here)
+
+<br/>
+
+🤔 What does this have to do with JS code execution?
+
+-> Answer: I'm glad you asked
+</div>
+<div>
+
+<img border="rounded" src="/images/stack_of_dishes.jpg">
+</div>
+</div>
+
+---
+
+# The Call Stack
+
+---
+
+# The Call Stack
+
+<div grid="~ cols-2 gap-4">
+<div>
+
+Let's take a look at this piece of code: 
+
+```ts {all|14|9-12|10|5-7|10|11|1-3|14|15}
+function eat(cookedFood: string) {
+  console.log("Chomp chomp", cookedFood);
+}
+
+function makeFood(food: string) {
+  return `Cooked ${food}`
+}
+
+function haveDinner(food: string) {
+  const cookedFood = makeFood(food);  
+  eat(cookedFood);
+}
+
+haveDinner("Fried Eggs");
+console.log("Rest and watch TV");
+```
+
+</div>
+<div>
+
+<CallStackCarousel />
+
+</div>
+</div>
+
