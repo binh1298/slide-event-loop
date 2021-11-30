@@ -8,8 +8,7 @@
   "dependencies": {
     "@slidev/cli": "^0.27.17",
     "@slidev/theme-default": "*",
-    "@slidev/theme-seriph": "*",
-    "vue-router": "^3.5.3"
+    "@slidev/theme-seriph": "*"
   },
   "name": "event-loop"
 }
