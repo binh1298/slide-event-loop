@@ -269,7 +269,7 @@ Our **JS code gets executed by a Javascript Engine**, each browser/environment u
 
 <br/>
 
-**The Javascript Engine runs inside a run-time environment**, which consist of the following components:
+**The Javascript Engine runs inside a run-time environment** which consists of the following components:
 - ⚙️ JS Engine: executes our code using the **Call Stack**
 - 🌐  Web API: provides DOM manipulation, AJAX, timer functions
 - 📞 Callback/Event/Message Queue: holds the messages/events waiting to be executed
@@ -318,7 +318,7 @@ fetchData("Students", function log(fetchedData) {
 
 <div class="flex justify-center items-center" h="full" w="full">
 
-## [Magic Link](http://latentflip.com/loupe/?code=ZnVuY3Rpb24gZmV0Y2hEYXRhKGRhdGEsIGNhbGxiYWNrKSB7CiAgICBzZXRUaW1lb3V0KGZ1bmN0aW9uIGZldGNoRGF0YUZyb21TZXJ2ZXIoKSB7IGNhbGxiYWNrKCJGZXRjaGVkIERhdGEiICsgZGF0YSkgfSwgNTAwMCk7Cn0KCmZldGNoRGF0YSgiQm9va3MiLCBmdW5jdGlvbiBsb2coZmV0Y2hlZERhdGEpIHsgY29uc29sZS5sb2coZmV0Y2hlZERhdGEpfSkKZmV0Y2hEYXRhKCJTdHVkZW50cyIsIGZ1bmN0aW9uIGxvZyhmZXRjaGVkRGF0YSkgeyBjb25zb2xlLmxvZyhmZXRjaGVkRGF0YSl9KQ%3D%3D!!!PGJ1dHRvbj5DbGljayBtZSE8L2J1dHRvbj4%3D)
+## [Magic Link](http://latentflip.com/loupe/?code=ZnVuY3Rpb24gZmV0Y2hEYXRhKGRhdGEsIGNhbGxiYWNrKSB7CiAgICBzZXRUaW1lb3V0KGZ1bmN0aW9uIGZldGNoRGF0YUZyb21TZXJ2ZXIoKSB7IAogICAgICBjYWxsYmFjaygiRmV0Y2hlZCBEYXRhIiArIGRhdGEpIAogICAgICB9LCAKICAgICAgNTAwMAogICAgKTsKfQoKZmV0Y2hEYXRhKCJCb29rcyIsIGZ1bmN0aW9uIGxvZyhmZXRjaGVkRGF0YSkgeyAKICBjb25zb2xlLmxvZyhmZXRjaGVkRGF0YSkKfSkKZmV0Y2hEYXRhKCJTdHVkZW50cyIsIGZ1bmN0aW9uIGxvZyhmZXRjaGVkRGF0YSkgeyAKICBjb25zb2xlLmxvZyhmZXRjaGVkRGF0YSkKfSk%3D!!!PGJ1dHRvbj5DbGljayBtZSE8L2J1dHRvbj4%3D)
 
 </div>
 
@@ -354,11 +354,11 @@ The JavaScript Engine (Chrome V8/Mozilla SpiderMonkey) executes our code. <br/> 
 
 <br/>
 
-**Event loop** is a **design pattern** that the run-time environment provide the implementation for us (and the engine) to use to give the illusion of multi-threading. <br/> It does it by using the call stack, event queue and run-time API ~~, and probably more but I'm not aware of them (yet)~~
+**Event loop** is a **design pattern** or a piece of program that the run-time environment provides for us (and the engine) to use to give **the illusion of multi-threading when executing Javascript code**. <br/> It does it by using the call stack, event queue and run-time API ~~, and probably more but I'm not aware of them (yet)~~
 
 <br/>
 
-Please don't hesitate if you have any questions
+Please don't hesitate to ask if you have any questions
 --- 
 
 # Acknowledgement
