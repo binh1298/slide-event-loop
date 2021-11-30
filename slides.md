@@ -60,10 +60,12 @@ h1 {
 
 # Agenda
 
-- 1. **Single threaded languages vs Multi threaded languages**
+- 1. **Multi threaded languages vs Single threaded languages**
 - 2. **Stack and Queue**
-- 3. **How Javascript execute your code using only stack**
-- 4. **Let's zoom out**
+- 3. **The Call Stack**
+- 4. **The run-time environment**
+- 5. **Event loop visualization**
+- 6. **Conclusion, Q&A** 
 
 ---
 
@@ -81,7 +83,7 @@ This mean they can execute **multiple things** at a time
 
 <br/>
 
-> Imagine eating with 2 hands. It means you can **eat multiple things at a time**. <br/> However, it **doesn't necessary mean that you can eat faster than with only one**.
+> Imagine eating with many hands. It means you can **eat multiple things at once**. <br/> However, it **doesn't necessary mean that you can eat faster than with only one hand**.
 
 </div>
 <div>
@@ -228,9 +230,11 @@ console.log("Render data:", data);
 
 ---
 
-# The problem with the Call Stack
+# The Call Stack
 
-##### 🤔 What if it takes a really long time to getFromService()? 🤔
+<br/>
+
+Let's take a look at this piece of code, do you see any problems?
 
 ```ts {all}
 function getFromService(data) {
@@ -247,40 +251,125 @@ function fetchData(data) {
 const data = fetchData("Books");
 console.log(data);
 ```
--> Answer: we actually need 3 things:
-- The browser's help (or Node/Deno): provides fetch/setTimeout
-- The queue & event loop
-- The callback pattern
-  
+
+-> We need help from **the Run-time Environment**
+
+
 ---
+
+# The run-time environment
+
+<br/>
+
+Our **JS code gets executed by a Javascript Engine**, each browser/environment uses a different engine 
+| Javascript Engine      | Browser                 |
+| -----------            | -----------             |
+| V8                     | Chrome and NodeJS       |
+| SpiderMonkey           | Mozilla FireFox         | 
+
+<br/>
+
+**The Javascript Engine runs inside a run-time environment**, which consist of the following components:
+- ⚙️ JS Engine: executes our code using the **Call Stack**
+- 🌐  Web API: provides DOM manipulation, AJAX, timer functions
+- 📞 Callback/Event/Message Queue: holds the messages/events waiting to be executed
+- 🔁 Event Loop: **constantly checking** if the **Call Stack** is empty or not. **If it's empty**, it pushes an event from the **Callback Queue** to the **Call Stack** 
+
+---
+
+# Event loop visualization
+
+<div class="h-sm">
+  <img border="rounded" h="full" src="/images/event_loop.png">
+
+  [Educative.io](https://www.educative.io/edpresso/what-is-an-event-loop-in-javascript)
+
+</div>
+
+---
+
+# Event loop visualization
 
 <div grid="~ cols-2 gap-4">
 <div>
 
-Let's take a look at this piece of code, assuming this entire piece is wrapped by a *main* function: 
+Let's try to visualize this piece of code:
 
 ```ts {all}
 function fetchData(data, callback) {
-  setTimeout(
-    () => {callback(`Fetched ${data}`)}, 
-    3000
-  )
+    setTimeout(function fetchDataFromServer() { 
+      callback("Fetched Data" + data) 
+      }, 
+      5000
+    );
 }
 
-fetchData("Books", (data) => console.log(data));
-fetchData("Students", (data) => console.log(data));
+fetchData("Books", function log(fetchedData) { 
+  console.log(fetchedData)
+})
+fetchData("Students", function log(fetchedData) { 
+  console.log(fetchedData)
+})
 
 ```
 
 </div>
 <div>
 
-<BrowserWrapper>
-<BrowserAPI/>
-<CallStackSetTimeout />
-</BrowserWrapper>
+<div class="flex justify-center items-center" h="full" w="full">
+
+## [Magic Link](http://latentflip.com/loupe/?code=ZnVuY3Rpb24gZmV0Y2hEYXRhKGRhdGEsIGNhbGxiYWNrKSB7CiAgICBzZXRUaW1lb3V0KGZ1bmN0aW9uIGZldGNoRGF0YUZyb21TZXJ2ZXIoKSB7IGNhbGxiYWNrKCJGZXRjaGVkIERhdGEiICsgZGF0YSkgfSwgNTAwMCk7Cn0KCmZldGNoRGF0YSgiQm9va3MiLCBmdW5jdGlvbiBsb2coZmV0Y2hlZERhdGEpIHsgY29uc29sZS5sb2coZmV0Y2hlZERhdGEpfSkKZmV0Y2hEYXRhKCJTdHVkZW50cyIsIGZ1bmN0aW9uIGxvZyhmZXRjaGVkRGF0YSkgeyBjb25zb2xlLmxvZyhmZXRjaGVkRGF0YSl9KQ%3D%3D!!!PGJ1dHRvbj5DbGljayBtZSE8L2J1dHRvbj4%3D)
+
+</div>
+
 
 </div>
 </div>
 
----
+<style>
+
+h2 {
+  background-color: #2B90B6;
+  background-image: linear-gradient(45deg, #4EC5D4 10%, #146b8c 20%);
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
+}
+a {
+  font-size: 4rem;
+  line-height: 1;
+}
+
+</style>
+
+--- 
+
+# Conclusion, Q&A
+
+<br/>
+
+The JavaScript Engine (Chrome V8/Mozilla SpiderMonkey) executes our code. <br/> However, in order to perform what we usually ask it to do (DOM manipulation, AJAX, timer functions), it relies heavily on the run-time environment (Browsers/Node/Deno) [Read more](https://blog.bitsrc.io/javascript-internals-javascript-engine-run-time-environment-settimeout-web-api-eeed263b1617)
+
+<br/>
+
+**Event loop** is a **design pattern** that the run-time environment provide the implementation for us (and the engine) to use to give the illusion of multi-threading. <br/> It does it by using the call stack, event queue and run-time API ~~, and probably more but I'm not aware of them (yet)~~
+
+<br/>
+
+Please don't hesitate if you have any questions
+--- 
+
+# Acknowledgement
+<br/>
+
+[What the heck is the event loop anyway? | Philip Roberts | JSConf EU ](https://www.youtube.com/watch?v=8aGhZQkoFbQ)
+
+<br/>
+
+[JavaScript Internals: JavaScript engine, Run-time environment & setTimeout Web API](https://blog.bitsrc.io/javascript-internals-javascript-engine-run-time-environment-settimeout-web-api-eeed263b1617)
+
+<br/>
+
+[What is an event loop in JavaScript?](https://www.educative.io/edpresso/what-is-an-event-loop-in-javascript)
