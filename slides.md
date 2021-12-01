@@ -42,7 +42,7 @@ What is it?
 
 # Hello, I'm Bình.
 
-I'm an Frontend Developer at Manabie
+I'm an Frontend Developer/Translator at Manabie
 
 <style>
 h1 {
@@ -114,7 +114,7 @@ This means it can only execute **one thing** at a time!
 
 🤔 How can Javascript executes asynchronous code? 
 
--> Answer: It uses the **event loop**
+-> Answer: It needs some help
 </div>
 <div>
 
@@ -125,7 +125,7 @@ This means it can only execute **one thing** at a time!
 <br/>
 <br/>
 
-#### In order to understand what **event loop** is, we have to understand 2 concepts: **Stack** & **Queue**
+#### In order to understand how to help Javascript, we have to understand 2 concepts: **Stack** & **Queue**
 
 ---
 
@@ -354,7 +354,7 @@ The JavaScript Engine (Chrome V8/Mozilla SpiderMonkey) executes our code. <br/> 
 
 <br/>
 
-**Event loop** is a **design pattern** or a piece of program that the run-time environment provides for us (and the engine) to use to give **the illusion of multi-threading when executing Javascript code**. <br/> It does it by using the call stack, event queue and run-time API ~~, and probably more but I'm not aware of them (yet)~~
+**Event loop** is a **design pattern** or a piece of program that the run-time environment provides for us (and the engine) to use to give **the illusion of concurrency (things happening at the same time) when executing Javascript code**. <br/> It does it by using the call stack, event queue and run-time API ~~, and probably more but I'm not aware of them (yet)~~
 
 <br/>
 

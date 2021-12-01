@@ -10,5 +10,11 @@
     "@slidev/theme-default": "*",
     "@slidev/theme-seriph": "*"
   },
-  "name": "event-loop"
+  "name": "event-loop",
+  "devDependencies": {
+    "playwright-chromium": "^1.17.0"
+  },
+  "slidev": {
+    "colorSchema": "dark"
+  }
 }
